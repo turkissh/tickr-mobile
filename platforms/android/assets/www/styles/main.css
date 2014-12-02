@@ -1,0 +1,29 @@
+.main{
+	text-align: center;
+	vertical-align: middle;
+	color: green;
+}
+
+.bar-header{
+	border-bottom: none;
+}
+
+#mainContent{
+	margin-top: 80%;
+}
+
+.tickLogo{
+	width: 20%;
+	height: 20%;
+}
+
+@media screen and (max-height: 450px) {
+    #mainContent{
+		margin-top: 50%;
+	}
+
+	.tickLogo{
+		width: 20%;
+		height: 15%;
+	}	
+}

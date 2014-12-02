@@ -1,0 +1,71 @@
+.intro{
+  padding-top: 30%;
+  color: white;
+  /*background: -webkit-linear-gradient(#3dd28a,#af95f5); 
+  background: -o-linear-gradient(#3dd28a,#af95f5); 
+  background: -moz-linear-gradient(#3dd28a,#af95f5); 
+  background: linear-gradient(#3dd28a,#af95f5); */
+  background-image: url("../images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 100;
+  text-align: center;
+}
+
+
+
+.intro h2 , h5 {
+	color: white;
+}
+
+.intro button {
+	border-radius: 3px;
+	font-size: 1.4em;
+	padding-right: 10%;
+	padding-left: 10%;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+}
+
+.row-middle{
+	margin-top: 30%;
+}
+
+
+.row-bottom{
+	position: absolute;
+	left: 5%;
+	right: 5%;
+	bottom: 10%;
+}
+
+#tickrLogo{
+	width: 13%;
+	height: 10%;
+}
+
+#tickrText{
+	width: 25%;
+	height: 7%;
+}
+
+@media screen and (max-height: 450px) {
+    .row-middle{
+		margin-top: 10%;
+	}
+
+	.intro button {
+		border-radius: 3px;
+		font-size: 1em;
+		padding-right: 10%;
+		padding-left: 10%;
+		padding-top: 0.1em;
+		padding-bottom: 0.1em;
+	}
+
+	#tickrLogo{
+		width: 12%;
+		height: 9%;
+	}
+}
