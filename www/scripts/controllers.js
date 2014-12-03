@@ -5,8 +5,15 @@ Tickr
 .controller('IntroCtrl', function($scope, $rootScope, $state , $http) {
 
 
+  $rootScope.urlAuthLogout = "http://tickr-app.herokuapp.com/api/auth/logout";
+  $rootScope.urlAuthUserId = "http://tickr-app.herokuapp.com/api/auth/userId";
+  $rootScope.urlHasSession = "http://tickr-app.herokuapp.com/api/auth/hasSession";
+  $rootScope.urlUserInfo   = "http://tickr-app.herokuapp.com/api/user/info";
+  $rootScope.urlTick       = "http://tickr-app.herokuapp.com/api/tick";
+
+
   var logout = function(){
-    $.get("http://tickr-app.herokuapp.com/api/auth/logout",function(data){
+    $.get($rootScope.urlAuthLogout,function(data){
 
       if(data.status == 0){
         alert("loged out!");
@@ -16,7 +23,7 @@ Tickr
   };
 
   var getUserData = function() {
-    $.get("http://tickr-app.herokuapp.com/api/auth/userId",function(data){
+    $.get($rootScope.urlAuthUserId,function(data){
 
        if(data.userId){
           $rootScope.userId = data.userId;
@@ -31,9 +38,8 @@ Tickr
 
   var getUserInfo = function() {
 
-    var url = "http://tickr-app.herokuapp.com/api/user/info?userId=" + $rootScope.userId;
 
-    $.get(url,function(res){
+    $.get($rootScope.urlUserInfo + "?userId=" + $rootScope.userId ,function(res){
 
       if(res.userId){
         $rootScope.userName = res.userName;
@@ -49,11 +55,10 @@ Tickr
   // Called to navigate to the main app
   var checkSession = function() {
 
-    $.get("http://tickr-app.herokuapp.com/api/auth/hasSession",function(data){
+    $.get($rootScope.urlHasSession,function(data){
         
         if(data.status == 0){
           if(!$rootScope.userId){
-            alert("There isnt userId");
             getUserData();
           }  
           $state.go('main');
@@ -68,7 +73,7 @@ Tickr
 
 })
 
-.controller('MainCtrl',  function(TicksService, $scope, $rootScope, $ionicSideMenuDelegate, $state) {
+.controller('MainCtrl',  function(TicksService, $scope, $rootScope, $ionicLoading, $state) {
 
   $scope.clickTick = function(){
 
@@ -77,6 +82,7 @@ Tickr
     if( clicked == false ){
       startTick();
     }else{
+      $ionicLoading.show();
       sendTick();
     }
 
@@ -96,6 +102,8 @@ Tickr
       function checkFlag() {
           if($rootScope.returnTick != 0) {
              window.setTimeout(checkFlag, 2000); /* this checks the flag every 100 milliseconds*/
+          }else{
+            $state.go('ticks');
           }
       }
 
@@ -104,10 +112,28 @@ Tickr
   }
 })
 
-.controller('Ticks', function(TicksService,$scope,$rootScope,$state){
+.controller('Ticks', function(TicksService,$scope,$rootScope,$ionicLoading,$state){
+
+  var goBack = function(){
+    $state.go('main');
+  };
 
 
+  //Get ticks from server using promises
+  TicksService.getTicks(function(data){
 
+        $scope.nearTicks = data;
+
+        //Save the nearest for being shown with more importance
+        $scope.firstTick = $scope.nearTicks[0]; 
+
+        //Remove the first one to generate a list
+        $scope.nearTicks.shift(); 
+
+        $ionicLoading.hide();     
+
+  });
+ 
   
 
 });

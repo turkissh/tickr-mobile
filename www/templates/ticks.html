@@ -1,12 +1,28 @@
-<ion-view hide-back-button="true" class="ticks" title="tickr">
-  <ion-content padding="true" ng-controller="Ticks">
+<ion-view hide-back-button="false" class="ticks" title="tickr">
+  <ion-content padding="false" ng-controller="Ticks">
 
-  <div class="bar bar-header bar-light">
-  	<button class="button button-icon icon ion-chevron-left"></button>
-  	Back
+  <div class="bar bar-header">
+  	<button class="button button-icon icon ion-chevron-left inlineText whiteText" ng-click="goBack()"></button>
+  	<h3 class="inlineText whiteText" ng-click="goBack()">Back</h3>
   </div>
 
-  <img src="">
-  
+  <div id="firstTick">
+  	<img class="mainImage rounded unmargined" src="{{ firstTick.photo }}">
+  	<h3 class="whiteText unmargined"> {{firstTick.userName}} </h3>
+  	<p class="unmargined">{{firstTick.about}}</p>
+  </div>
+
+  <hr id="separator" class="unmargined"></hr>
+
+  <div class="list unmargined">
+  	
+  	<div class="item item-thumbnail-left" ng-repeat="tick in nearTicks">
+  		<img class="rounded" src="{{ tick.photo }}">
+  		<h2>{{ tick.userName }}</h2>
+  		<p>{{ tick.about }}</p>
+  	</div>
+
+  </div>
+
   </ion-content>
 </ion-view>

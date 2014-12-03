@@ -21,10 +21,4 @@ function login() {
     });
 };
 
-// function startTick() {
-        
-//     $('#text').text('Release on green!');
-//     $('.main').animate({'background-color':'#4AD39C'},3000);
-
-// };
 

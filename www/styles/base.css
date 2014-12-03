@@ -6,10 +6,27 @@
   color: rgba(0,0,0,0.2);
 }
 
+.whiteText{
+	color: white;
+}
+
 .thick{
 	font-weight: lighter;
 }
 
 .center{
 	text-align: center;
+}
+
+.inlineText{
+	display: inline;
+}
+
+.rounded{
+	border-radius: 200px;
+}
+
+.unmargined{
+	margin: 0px;
+	padding: 0px;
 }

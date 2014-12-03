@@ -1,3 +1,42 @@
 .ticks{
-	background-color: green;
+	background-color: #4AD39C;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  	font-weight: 100;
+}
+
+.ticks .bar-header{
+	display: inline;
+	background-color: #4AD39C;
+	vertical-align: middle;
+	color: white;
+}
+
+.ticks #firstTick{
+	margin-top: 15%;
+	text-align: center;
+	color:white;
+}
+
+
+.ticks #firstTick img{
+	display: block;
+	max-width: 30%;
+	max-height: 30%;
+	width: auto;
+	height: auto;
+	margin: auto;
+	border: solid 4px white;
+}
+
+.ticks #separator{
+	margin-top: 10%;
+	min-height: 10px;
+	height: 10px;
+	background-color: #6EDBAF;
+	display: block;
+	border: none;
+}
+
+.ticks .list .item img{
+	border-radius: 200px;
 }

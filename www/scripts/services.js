@@ -2,7 +2,7 @@
 //angular.module('Tickr.services', [])
 Tickr
 
-.service('TicksService',function($rootScope,$state){
+.service('TicksService',function($rootScope,$state,$http,$q){
 
   $rootScope.clicked = false;
 
@@ -35,17 +35,16 @@ Tickr
 		  lat = crd.latitude;
 		  long = crd.longitude;
 
-		    var data = Object();
-		    data.userId = $rootScope.userId;
-		    data.long = long;
-		    data.lat = lat;
+		    var payload = Object();
+		    payload.userId = $rootScope.userId;
+		    payload.long = long;
+		    payload.lat = lat;
 
-		    $.post("http://tickr-app.herokuapp.com/api/tick",data,function(data) {
+		    $.post($rootScope.urlTick , payload , function(data) {
 		      if( data.status == 1){
 		        alert('Error sending tick!');
 		        $rootScope.returnTick = data.status;
 		      }else if( data.status == 0 ){
-		      	alert("Tick recieved by server");
 		        $rootScope.returnTick = data.status;
 		      }else {
 		        alert('WTF happend?');
@@ -63,8 +62,6 @@ Tickr
 
 	if (navigator.geolocation) {
 
-		alert('Getting position');
-
 		navigator.geolocation.getCurrentPosition(success, error,options);
 	          
 	}else{
@@ -75,4 +72,33 @@ Tickr
 
   };
 
+
+  this.getTicks = function(next){
+
+  	$.get($rootScope.urlTick + "?userId=" + $rootScope.userId, function(res){
+
+  		next(res);
+
+  	});
+
+  };
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
