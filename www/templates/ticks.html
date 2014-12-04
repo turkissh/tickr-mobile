@@ -1,12 +1,13 @@
-<ion-view hide-back-button="false" class="ticks" title="tickr">
+<ion-view hide-back-button="true" class="ticks" title="tickr">
   <ion-content padding="false" ng-controller="Ticks">
 
-  <div class="bar bar-header">
+  <div class="myBar">
   	<button class="button button-icon icon ion-chevron-left inlineText whiteText" ng-click="goBack()"></button>
-  	<h3 class="inlineText whiteText" ng-click="goBack()">Back</h3>
+  	<h3 class="inlineText whiteText marginedTop" ng-click="goBack()">Back</h3>
   </div>
 
-  <div id="firstTick">
+  <!-- This is wrong, have to find the way to send the firstTick userID -->
+  <div id="firstTick" ng-click="sendMatch( 1 )">
   	<img class="mainImage rounded unmargined" src="{{ firstTick.photo }}">
   	<h3 class="whiteText unmargined"> {{firstTick.userName}} </h3>
   	<p class="unmargined">{{firstTick.about}}</p>
@@ -17,9 +18,9 @@
   <div class="list unmargined">
   	
   	<div class="item item-thumbnail-left" ng-repeat="tick in nearTicks">
-  		<img class="rounded" src="{{ tick.photo }}">
-  		<h2>{{ tick.userName }}</h2>
-  		<p>{{ tick.about }}</p>
+  		<img class="rounded" ng-click="sendMatch( {{ tick.photo }})" src="{{ tick.photo }}">
+  		<h2 ng-click="sendMatch( {{ tick.userId }})">{{ tick.userName }}</h2>
+  		<p ng-click="sendMatch( {{ tick.userId }})">{{ tick.about }}</p>
   	</div>
 
   </div>

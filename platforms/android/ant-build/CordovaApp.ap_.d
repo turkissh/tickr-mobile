@@ -506,5 +506,6 @@
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/styles/ticks.css \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/intro.html \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/main.html \
+/Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/menu.html \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/ticks.html \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/ant-build/AndroidManifest.xml \

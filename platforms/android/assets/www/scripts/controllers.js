@@ -10,6 +10,7 @@ Tickr
   $rootScope.urlHasSession = "http://tickr-app.herokuapp.com/api/auth/hasSession";
   $rootScope.urlUserInfo   = "http://tickr-app.herokuapp.com/api/user/info";
   $rootScope.urlTick       = "http://tickr-app.herokuapp.com/api/tick";
+  $rootScope.urlMatch      = "http://tickr-app.herokuapp.com/api/match";
 
 
   var logout = function(){
@@ -61,7 +62,7 @@ Tickr
           if(!$rootScope.userId){
             getUserData();
           }  
-          $state.go('main');
+          $state.go('menu.main');
         }else{
           $state.go('intro');
         }
@@ -73,7 +74,21 @@ Tickr
 
 })
 
-.controller('MainCtrl',  function(TicksService, $scope, $rootScope, $ionicLoading, $state) {
+.controller('MainCtrl',  function(TicksService, $scope, $rootScope, 
+                                  $ionicLoading, $ionicSideMenuDelegate, $state) {
+
+  //Value for validate the tick button dont response until 3seg
+  $scope.isEnable = true;
+
+  //For the left menu
+  $scope.toogleLeft = function(){
+    $ionicSideMenuDelegate.toogleLeft();
+  };
+
+  $scope.toogleRight = function(){
+    $ionicSideMenuDelegate.toogleRight();
+  };
+
 
   $scope.clickTick = function(){
 
@@ -90,10 +105,21 @@ Tickr
 
   var startTick = function() {
  
-    $scope.tickStatus = TicksService.send();
+    $scope.isEnable = false;
+    TicksService.send(function(data){
+
+      if(data == 3){
+        $state.go('intro');
+      }else if(data == 1 ){
+        $state.go('menu.main');
+      }
+
+    });
 
     $('#text').text('Click again on green!');
     $('.main').animate({'background-color':'#4AD39C'},3000);
+
+    setTimeout(function(){ $scope.isEnable = true; } , 3000);
 
   };
 
@@ -114,13 +140,18 @@ Tickr
 
 .controller('Ticks', function(TicksService,$scope,$rootScope,$ionicLoading,$state){
 
-  var goBack = function(){
-    $state.go('main');
+  $scope.goBack = function(){
+    $state.go('menu.main');
   };
 
 
-  //Get ticks from server using promises
+  //Get ticks from server
   TicksService.getTicks(function(data){
+
+        if(data.length == 0){
+          alert("No ticks near");
+          $state.go('menu.main');
+        }
 
         $scope.nearTicks = data;
 
@@ -130,9 +161,47 @@ Tickr
         //Remove the first one to generate a list
         $scope.nearTicks.shift(); 
 
+        if($scope.nearTicks.length < 3){
+
+          for (var i = $scope.nearTicks.length; i < 3; i++) {
+
+            var fakeUser = new Object();
+
+            fakeUser.userId = "";
+            fakeUser.userName = "";
+            fakeUser.photo = "";
+            fakeUser.about = "";
+
+            $scope.nearTicks.push(fakeUser);
+          };
+
+        }
+
         $ionicLoading.hide();     
 
   });
+
+  $scope.sendMatch = function(matchId){
+
+    //To fix the problem sending the firstTick userID
+    if(matchId == 1){
+      matchId = $scope.firstTick.userId;
+    }
+
+    $ionicLoading.show();
+
+    TicksService.sendMatch(matchId,function(data){
+
+      $ionicLoading.hide();
+      if(data.status == 3){
+        $state.go('intro');
+      }else{
+        $state.go('menu.main');
+      }
+
+    });
+
+  }
  
   
 

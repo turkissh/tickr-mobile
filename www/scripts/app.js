@@ -22,15 +22,25 @@ var Tickr = angular.module('Tickr', ['ionic', 'config'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
+  .state('menu',{
+    url: '/menu',
+    abstract:true,
+    templateUrl: 'templates/menu.html',
+    controller: 'MainCtrl'
+  })
   .state('intro', {
     url: '/',
     templateUrl: 'templates/intro.html',
     controller: 'IntroCtrl'
   })
-  .state('main', {
+  .state('menu.main', {
     url: '/main',
-    templateUrl: 'templates/main.html',
-    controller: 'MainCtrl'
+    views: {
+      'menuContent':{
+        templateUrl: 'templates/main.html',
+        controller: 'MainCtrl'
+      }
+    }
   })
   .state('ticks',{
     url: '/ticks',
