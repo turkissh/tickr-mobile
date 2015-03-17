@@ -2,7 +2,68 @@
 //angular.module('Tickr.services', [])
 Tickr
 
-.service('TicksService',function($rootScope,$state,$http,$q){
+
+.service('UserService',function($rootScope,$scope){
+
+	this.logOut = function(callback){
+
+		$.get($rootScope.urlAuthLogout,function(data){
+
+	      callback(data);
+
+	    });
+
+	};
+
+	this.getUserId = function(callback){
+
+		$.get($rootScope.urlAuthUserId,function(data){
+
+			callback(data);
+
+		});
+
+	};
+
+
+	this.getUserInfo = function(callback){
+
+		$.get($rootScope.urlUserInfo + "?userId=" + $rootScope.userId
+		 ,function(data){
+
+			callback(data);
+		});
+
+	};
+
+	this.checkSession = function(callback){
+
+		$.get($rootScope.urlHasSession,function(data){
+
+			callback(data);
+
+		});
+	};
+
+
+	this.setUserInfo = function(payload){
+
+		$.post($rootScope.urlUserInfo,payload,function(data){
+
+			if(data.status == 1){
+				alert("Error updating user info");
+			};
+			
+		});
+
+
+
+	};
+
+})
+
+
+.service('TicksService',function($rootScope,$state){
 
   $rootScope.clicked = false;
 
@@ -114,6 +175,27 @@ Tickr
 	    },"json");
 
   };
+
+})
+
+.service('MatchService',function($rootScope,$state){
+
+	this.getMatches = function(callback){
+
+		$.get($rootScope.urlMatch + "?userId=" + $rootScope.userId,function(res){
+
+			if(res.status == 1){
+				alert("General error finding user");
+			}else if(res.status == 2){
+				alert("Error user dosent exists");
+			}
+
+			callback(res);
+
+		});
+
+	};
+
 
 });
 

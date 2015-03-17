@@ -26,7 +26,7 @@ var Tickr = angular.module('Tickr', ['ionic', 'config'])
     url: '/menu',
     abstract:true,
     templateUrl: 'templates/menu.html',
-    controller: 'MainCtrl'
+    controller: 'MenuCtrl'
   })
   .state('intro', {
     url: '/',

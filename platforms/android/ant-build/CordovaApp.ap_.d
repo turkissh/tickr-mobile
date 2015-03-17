@@ -489,11 +489,13 @@
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/plugins/org.apache.cordova.vibration/www/vibration.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/app.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/config.js \
+/Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/controllers (naboo's conflicted copy 2014-12-16).js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/controllers.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/jquery-1.11.0.min.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/jquery-ui.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/jquery-ui.min.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/jquery.color-2.1.2.min.js \
+/Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/services (naboo's conflicted copy 2014-12-16).js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/services.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/scripts/tickr.js \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/styles/base.css \
@@ -508,4 +510,5 @@
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/main.html \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/menu.html \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/ticks.html \
+/Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/assets/www/templates/user.html \
 /Users/turkissh/Dropbox/development/proyects/tickr/app/platforms/android/ant-build/AndroidManifest.xml \

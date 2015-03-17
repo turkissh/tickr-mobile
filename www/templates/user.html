@@ -1,0 +1,56 @@
+<ion-view hide-back-button="true" class="user" title="">
+<ion-content padding="false" ng-controller="User">
+
+  <div class="myBar">
+    <button class="button button-icon icon ion-chevron-left inlineText whiteText" ng-click="goBack()"></button>
+    <h3 class="inlineText whiteText marginedTop" ng-click="goBack()">Back</h3>
+  </div>
+
+  <!-- User photo -->
+  <div id="userPhoto">
+    <img class="mainImage rounded unmargined" src="{{ photo }}">
+  </div>
+
+  <!-- Setup -->
+  <div class="list">
+    
+    <div class="item item-divider">
+      Info
+    </div>
+
+    <label class="item item-input">
+      <span class="input-label">Name</span>
+      <input type="text" ng-model="userName"placeholder="{{ userName }}">
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">Description</span>
+      <input type="text" ng-model="about" placeholder="{{ about }}">
+    </label>
+
+    <div class="item item-divider">
+      Sharing
+    </div>
+
+    <ion-toggle 
+      ng-checked="info.fbVisibility" 
+      ng-model="info.fbVisibility">
+      Facebook
+    </ion-toggle>
+
+    <ion-toggle 
+      ng-checked="info.emailVisibility"
+      ng-model="info.emailVisibility"  >
+      Email
+    </ion-toggle>
+
+    <ion-toggle 
+      ng-checked="info.telVisibility"
+      ng-model="info.telVisibility"  >
+      Tel
+    </ion-toggle>
+
+
+
+  </ion-content>
+</ion-view>

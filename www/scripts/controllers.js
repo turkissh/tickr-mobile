@@ -2,7 +2,7 @@
 //angular.module('Tickr.controllers', [])
 Tickr
 
-.controller('IntroCtrl', function($scope, $rootScope, $state , $http) {
+.controller('IntroCtrl', function(UserService,$scope, $rootScope, $state , $http) {
 
 
   $rootScope.urlAuthLogout = "http://tickr-app.herokuapp.com/api/auth/logout";
@@ -14,17 +14,20 @@ Tickr
 
 
   var logout = function(){
-    $.get($rootScope.urlAuthLogout,function(data){
+      
+      UserService.logOut(function(data){
 
-      if(data.status == 0){
-        alert("loged out!");
-      };
-    });
+        if(data.status == 0){
+          alert("loged out!");
+        };
 
+      });
+      
   };
 
+
   var getUserData = function() {
-    $.get($rootScope.urlAuthUserId,function(data){
+    UserService.getUserId(function(data){
 
        if(data.userId){
           $rootScope.userId = data.userId;
@@ -39,24 +42,29 @@ Tickr
 
   var getUserInfo = function() {
 
+    UserService.getUserInfo(function(data){
 
-    $.get($rootScope.urlUserInfo + "?userId=" + $rootScope.userId ,function(res){
+      if(data.status){
+        alert("Error getting user info");
+      }
 
-      if(res.userId){
-        $rootScope.userName = res.userName;
-        $rootScope.userPhoto = res.userPhoto;
-        $rootScope.userInfo = res.info;
+      if(data.userId){
+        $rootScope.userName   = data.userName;
+        $rootScope.about      = data.about;
+        $rootScope.userPhoto  = data.photo;
+        $rootScope.userInfo   = data.info;
       }else{
         alert("Error login, contact developers");
       }
     });
+
   };
 
 
   // Called to navigate to the main app
   var checkSession = function() {
 
-    $.get($rootScope.urlHasSession,function(data){
+    UserService.checkSession(function(data){
         
         if(data.status == 0){
           if(!$rootScope.userId){
@@ -74,6 +82,55 @@ Tickr
 
 })
 
+.controller('MenuCtrl',function(MatchService,$scope,$rootScope){
+
+
+  $scope.matches = new Array();
+
+  //Recovers the matches for the right menu
+  $scope.getMatches = function(){
+
+      alert($rootScope.userName);
+
+      MatchService.getMatches(function(res){
+
+        $scope.matches = res;
+        $scope.$apply();
+    
+    });
+  };
+
+})
+
+
+.controller('User',function(UserService,$scope,$rootScope){
+
+  $scope.photo = $rootScope.userPhoto;
+  $scope.name = $rootScope.userName;
+  $scope.about = $rootScope.about;
+  $scope.fbVisibility = $rootScope.userInfo.fbVisibility;
+  $scope.emailVisibility = $rootScope.userInfo.emailVisibility;
+  $scope.telVisibility = $rootScope.userInfo.telVisibility;
+
+  $scope.goBack = function(){
+
+    var data = Object();
+    data.userId = $rootScope.userId;
+    data.name = $scope.name;
+    data.about = $scope.about;
+    data.fbVisibility = $scope.fbVisibility;
+    data.emailVisibility = $scope.emailVisibility;
+    data.telVisibility = $scope.telVisibility;
+
+    UserService.setUserInfo(data);
+
+    $state.go('menu.main');
+  };
+
+
+
+})
+
 .controller('MainCtrl',  function(TicksService, $scope, $rootScope, 
                                   $ionicLoading, $ionicSideMenuDelegate, $state) {
 
@@ -88,6 +145,7 @@ Tickr
   $scope.toogleRight = function(){
     $ionicSideMenuDelegate.toogleRight();
   };
+
 
 
   $scope.clickTick = function(){
